@@ -1,0 +1,33 @@
+name: CD - Production Deploy
+
+on:
+  push:
+    branches: [ "production" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production  # Enforces manual approval in GitHub
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build & Push Docker Image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/jobconnect-backend:latest .
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker push ghcr.io/${{ github.repository }}/jobconnect-backend:latest
+
+      - name: Deploy to Production Server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script: |
+            docker pull ghcr.io/${{ github.repository }}/jobconnect-backend:latest
+            docker stop jobconnect || true
+            docker rm jobconnect || true
+            docker run -d --name jobconnect -p 8000:8000 \
+              --env-file /home/${{ secrets.PROD_USER }}/.env.prod \
+              ghcr.io/${{ github.repository }}/jobconnect-backend:latest

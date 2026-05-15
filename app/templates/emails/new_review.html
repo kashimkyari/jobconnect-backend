@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}New Review from {{ reviewer_name }}{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        You've Received a New Review! ⭐
+    </div>
+
+    <p class="body-text">
+        Hi {{ recipient_name }},
+    </p>
+
+    <p class="body-text">
+        <strong>{{ reviewer_name }}</strong> has left you a review on JobConnect. 
+        This will help build your professional reputation.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">⭐ Review Summary</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">From:</div>
+                <div class="info-row-value"><strong>{{ reviewer_name }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Rating:</div>
+                <div class="info-row-value" style="font-size: 16px;">
+                    {% for i in range(rating) %}⭐{% endfor %}{% for i in range(5 - rating) %}☆{% endfor %} <strong>{{ rating }}/5</strong>
+                </div>
+            </div>
+            {% if job_title %}
+            <div class="info-row">
+                <div class="info-row-label">Job/Project:</div>
+                <div class="info-row-value">{{ job_title }}</div>
+            </div>
+            {% endif %}
+            <div class="info-row">
+                <div class="info-row-label">Posted On:</div>
+                <div class="info-row-value">{{ review_date }}</div>
+            </div>
+        </div>
+    </div>
+
+    {% if review_text %}
+    <div class="section-title">Review Comment</div>
+    <div style="background: var(--color-bg-secondary); border-left: 4px solid var(--color-primary); padding: 16px; margin: 16px 0; border-radius: 8px;">
+        <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6;">
+            "{{ review_text }}"
+        </p>
+    </div>
+    {% endif %}
+
+    {% if rating >= 4 %}
+    <div class="success-box">
+        <strong>🎉 Great Work!</strong> This positive review will help attract more opportunities and build trust with potential clients and employers.
+    </div>
+    {% else %}
+    <p class="body-text">
+        <strong>Learn & Improve:</strong> Consider this feedback constructively and work on the areas mentioned in the review.
+    </p>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ review_url }}" class="button">View Full Review</a>
+        <a href="{{ profile_url }}" class="button button-secondary">View Your Profile</a>
+    </div>
+
+    {% if rating < 4 %}
+    <div class="alert-box">
+        <strong>💡 Quick Tip:</strong> You can respond to this review and explain your actions or improvements if you wish.
+    </div>
+    {% endif %}
+{% endblock %}

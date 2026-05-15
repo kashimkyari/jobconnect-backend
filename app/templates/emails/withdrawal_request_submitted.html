@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Withdrawal Request Submitted{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Withdrawal Request Submitted 📤
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Your withdrawal request has been submitted and is now pending admin review. Here are the details:
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">💰 Withdrawal Request Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Withdrawal Amount:</div>
+                <div class="info-row-value">{{ withdrawal_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Tax ({{ tax_rate }}):</div>
+                <div class="info-row-value">{{ tax_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Charged:</div>
+                <div class="info-row-value" style="font-size: 16px; font-weight: 700; color: var(--color-danger);">{{ total_amount }}</div>
+            </div>
+            <div class="info-row" style="margin-top: 12px; border-top: 1px solid var(--color-border); padding-top: 12px;">
+                <div class="info-row-label">Recipient Bank:</div>
+                <div class="info-row-value">{{ bank_name }} ***{{ account_number_last_4 }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Request Date:</div>
+                <div class="info-row-value">{{ request_date }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <strong>ℹ️ What's Next?</strong> Your withdrawal request is now under review. An admin will verify the details and either approve or decline your request within 24 hours.
+    </div>
+
+    <div class="warning-box">
+        <strong>⚠️ Fund Hold:</strong> The requested amount (₦{{ total_amount }}) is being held in your wallet until the withdrawal is processed. This ensures the funds are available when your request is approved.
+    </div>
+
+    <div class="cta-section">
+        <a href="{{ dashboard_url }}" class="button">Track Status in Dashboard</a>
+    </div>
+
+    <p class="body-text" style="margin-top: 20px;">
+        If you have any questions or need to modify this request, please contact our support team.
+    </p>
+{% endblock %}

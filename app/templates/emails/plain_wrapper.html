@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="greeting">{{ title }}</div>
+
+    <div class="body-text">
+        {{ message | safe }}
+    </div>
+
+    <div class="divider"></div>
+    <p class="body-text" style="font-size:13px;color:var(--color-text-secondary);">If you have questions, reply to this email or visit <a href="{{ app_url }}" style="color:var(--color-primary)">JobConnect</a>.</p>
+{% endblock %}

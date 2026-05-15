@@ -1,0 +1,96 @@
+name: FastAPI + Postgres CI
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: jobconnect
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Initialize database with sample data
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/jobconnect
+          TEST_DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/jobconnect
+          JWT_SECRET_KEY: dummy
+          JWT_REFRESH_SECRET_KEY: dummy
+          JWT_ALGORITHM: HS256
+          ACCESS_TOKEN_EXPIRE_MINUTES: 30
+          REFRESH_TOKEN_EXPIRE_DAYS: 7
+          PAYSTACK_SECRET_KEY: dummy
+          PAYSTACK_PUBLIC_KEY: dummy
+          MAILGUN_API_KEY: dummy
+          MAILGUN_DOMAIN: dummy
+          MAILGUN_FROM_EMAIL: test@example.com
+          TWILIO_ACCOUNT_SID: dummy
+          TWILIO_AUTH_TOKEN: dummy
+          TWILIO_FROM_NUMBER: +10000000000
+          UPLOAD_DIR: storage/uploads
+          MAX_UPLOAD_SIZE: 5242880
+          UVERIFY_API_KEY: dummy
+          UVERIFY_API_URL: https://sandbox.uverify.com/v1
+          ALLOWED_ORIGINS: '["http://localhost:3000"]'
+          RATE_LIMIT_PER_MINUTE: 60
+          DEBUG: "True"
+          API_V1_PREFIX: /api/v1
+          PROJECT_NAME: JobConnect
+          VERSION: 1.0.0
+        run: python3 app/scripts/init_db_with_sample_data.py
+
+
+      - name: Run specific test file
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/jobconnect
+          TEST_DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/jobconnect
+          JWT_SECRET_KEY: dummy
+          JWT_REFRESH_SECRET_KEY: dummy
+          JWT_ALGORITHM: HS256
+          ACCESS_TOKEN_EXPIRE_MINUTES: 30
+          REFRESH_TOKEN_EXPIRE_DAYS: 7
+          PAYSTACK_SECRET_KEY: dummy
+          PAYSTACK_PUBLIC_KEY: dummy
+          MAILGUN_API_KEY: dummy
+          MAILGUN_DOMAIN: dummy
+          MAILGUN_FROM_EMAIL: test@example.com
+          TWILIO_ACCOUNT_SID: dummy
+          TWILIO_AUTH_TOKEN: dummy
+          TWILIO_FROM_NUMBER: +10000000000
+          UPLOAD_DIR: storage/uploads
+          MAX_UPLOAD_SIZE: 5242880
+          UVERIFY_API_KEY: dummy
+          UVERIFY_API_URL: https://sandbox.uverify.com/v1
+          ALLOWED_ORIGINS: '["http://localhost:3000"]'
+          RATE_LIMIT_PER_MINUTE: 60
+          DEBUG: "True"
+          API_V1_PREFIX: /api/v1
+          PROJECT_NAME: JobConnect
+          VERSION: 1.0.0
+        run: pytest tests/test.py -v

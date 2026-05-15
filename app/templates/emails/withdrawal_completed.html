@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Withdrawal Completed{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Withdrawal Completed ✅
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Excellent news! Your withdrawal has been successfully transferred to your bank account. The funds should appear within 1-2 business days depending on your bank's processing time.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">💳 Transfer Confirmation</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Amount Received:</div>
+                <div class="info-row-value" style="font-size: 18px; font-weight: 700; color: var(--color-success);">{{ withdrawal_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Charged:</div>
+                <div class="info-row-value">{{ total_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Recipient Bank:</div>
+                <div class="info-row-value">{{ bank_name }} ***{{ account_number_last_4 }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Transfer Date:</div>
+                <div class="info-row-value">{{ transfer_date }}</div>
+            </div>
+            {% if transfer_reference %}
+            <div class="info-row">
+                <div class="info-row-label">Transfer Reference:</div>
+                <div class="info-row-value">#{{ transfer_reference }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="success-box">
+        <strong>✓ Transfer Confirmed:</strong> The withdrawal has been processed successfully. If you don't see the funds in your bank account within 2 business days, please contact your bank.
+    </div>
+
+    <div class="cta-section">
+        <a href="{{ dashboard_url }}" class="button">View Full Transaction Details</a>
+    </div>
+
+    <p class="body-text" style="margin-top: 20px;">
+        Thank you for using JobConnect. If you have any questions or concerns about this transfer, our support team is here to help.
+    </p>
+
+    <p class="body-text" style="font-size: 12px; color: var(--color-text-secondary); margin-top: 20px;">
+        <a href="{{ support_url }}" style="color: var(--color-info);">Contact Support</a> • <a href="{{ dashboard_url }}" style="color: var(--color-info);">View Account</a>
+    </p>
+{% endblock %}

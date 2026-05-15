@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Job Posted Successfully{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Your Job Has Been Posted! 🚀
+    </div>
+
+    <p class="body-text">
+        Hi {{ employer_name }},
+    </p>
+
+    <p class="body-text">
+        Congratulations! Your job listing is now live on JobConnect and visible to thousands of qualified professionals.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Job Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Job Title:</div>
+                <div class="info-row-value"><strong>{{ job_title }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Location:</div>
+                <div class="info-row-value">{{ location }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Job ID:</div>
+                <div class="info-row-value">#{{ job_id }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Posted On:</div>
+                <div class="info-row-value">{{ posted_date }}</div>
+            </div>
+            {% if expiry_date %}
+            <div class="info-row">
+                <div class="info-row-label">Expires On:</div>
+                <div class="info-row-value">{{ expiry_date }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <p class="body-text">
+        <strong>Share your job listing:</strong> Increase visibility by sharing this link with your network.
+    </p>
+
+    <div class="code-block">{{ job_link }}</div>
+
+    <div class="section-title">What Happens Next</div>
+    <div class="list-item">Qualified professionals can start viewing your job listing</div>
+    <div class="list-item">Applicants can submit their profiles and cover letters</div>
+    <div class="list-item">You'll receive email notifications for each new application</div>
+    <div class="list-item">Review and communicate with candidates directly</div>
+
+    <div class="button-container">
+        <a href="{{ job_url }}" class="button">View Job Listing</a>
+        <a href="{{ manage_url }}" class="button button-secondary">Manage Applications</a>
+    </div>
+
+    <div class="success-box">
+        <strong>💡 Pro Tips:</strong>
+        <ul style="margin: 12px 0 0 20px; padding: 0;">
+            <li>Write a compelling job description to attract top talent</li>
+            <li>Respond to applications within 24 hours for better engagement</li>
+            <li>Consider upgrading to highlight your job for better visibility</li>
+        </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Need help? View our 
+        <a href="{{ app_url }}/help/posting-jobs" style="color: var(--color-primary); text-decoration: none;">job posting guide</a> 
+        or <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">contact support</a>.
+    </p>
+{% endblock %}

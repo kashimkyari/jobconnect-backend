@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Your Monthly Digest - Insights & Opportunities{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Your JobConnect Monthly Digest 📊
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Here's a summary of your activity on JobConnect for {{ month }}. 
+        See your achievements, new opportunities, and how you're growing on the platform!
+    </p>
+
+    {% if user_type == "employer" %}
+    <div class="section-title">Your Hiring Activity</div>
+    <div class="info-row">
+        <div class="info-row-label">Active Jobs:</div>
+        <div class="info-row-value"><strong>{{ active_jobs }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">New Applications:</div>
+        <div class="info-row-value"><strong>{{ new_applications }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Candidates Interviewed:</div>
+        <div class="info-row-value">{{ candidates_interviewed }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Positions Filled:</div>
+        <div class="info-row-value" style="color: var(--color-success);">{{ positions_filled }}</div>
+    </div>
+
+    {% if top_candidate %}
+    <div class="highlight-box">
+        <div class="highlight-box-title">⭐ Top Candidate This Month</div>
+        <div class="highlight-box-content">
+            <strong>{{ top_candidate.name }}</strong><br>
+            Role: {{ top_candidate.role }}<br>
+            Rating: ⭐ {{ top_candidate.rating }}/5
+        </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="section-title">Your Career Activity</div>
+    <div class="info-row">
+        <div class="info-row-label">Applications Sent:</div>
+        <div class="info-row-value"><strong>{{ applications_sent }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Interviews Scheduled:</div>
+        <div class="info-row-value"><strong>{{ interviews_scheduled }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Profile Views:</div>
+        <div class="info-row-value">{{ profile_views }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Skills Endorsed:</div>
+        <div class="info-row-value">{{ skills_endorsed }}</div>
+    </div>
+
+    {% if top_job %}
+    <div class="highlight-box">
+        <div class="highlight-box-title">🎯 Best Match for You</div>
+        <div class="highlight-box-content">
+            <strong>{{ top_job.title }}</strong><br>
+            Company: {{ top_job.company }}<br>
+            Salary: {{ top_job.salary }}<br>
+            <a href="{{ top_job.url }}" style="color: var(--color-primary); text-decoration: none;">View Job →</a>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endif %}
+
+    {% if recent_activity %}
+    <div class="section-title">Recent Activity Highlights</div>
+    {% for activity in recent_activity %}
+    <div class="list-item">{{ activity }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="divider"></div>
+
+    <div class="section-title">Tips to Boost Your Success</div>
+    {% if user_type == "employer" %}
+    <div class="list-item">Complete your company profile to attract more applications</div>
+    <div class="list-item">Respond to applications within 24 hours for better engagement</div>
+    <div class="list-item">Use premium job postings to increase visibility</div>
+    {% else %}
+    <div class="list-item">Update your resume with recent projects and achievements</div>
+    <div class="list-item">Complete your profile to increase visibility to employers</div>
+    <div class="list-item">Set up job alerts for roles matching your expertise</div>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ dashboard_url }}" class="button">View Full Analytics</a>
+        <a href="{{ action_url }}" class="button button-secondary">Take Next Step</a>
+    </div>
+{% endblock %}

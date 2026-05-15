@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Withdrawal Transfer Dispute Opened{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Withdrawal Transfer Issue ⚠️
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        We encountered an issue while processing your withdrawal transfer to your bank account. We've automatically opened a support case to help resolve this.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Withdrawal Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Withdrawal Amount:</div>
+                <div class="info-row-value">{{ withdrawal_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Charged:</div>
+                <div class="info-row-value" style="font-size: 16px; font-weight: 700; color: var(--color-danger);">₦{{ total_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Recipient Bank:</div>
+                <div class="info-row-value">{{ bank_name }} ***{{ account_number_last_4 }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Dispute ID:</div>
+                <div class="info-row-value">#{{ dispute_id }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Case Opened:</div>
+                <div class="info-row-value">{{ created_date }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-box">
+        <strong>✓ Funds Secured:</strong> The amount (₦{{ total_amount }}) has been automatically restored to your wallet while we investigate.
+    </div>
+
+    <div class="section-title">What Happened?</div>
+    <div style="background: var(--color-bg-secondary); border-left: 4px solid #ff6b6b; padding: 16px; margin: 16px 0; border-radius: 4px;">
+        <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6;">
+            {{ failure_reason }}
+        </p>
+    </div>
+
+    <div class="section-title">What Happens Next?</div>
+    <div class="list-item">Our support team will investigate the issue with your bank and the payment provider</div>
+    <div class="list-item">We will attempt to retry the transfer within 24-48 hours if the issue can be resolved</div>
+    <div class="list-item">If the issue cannot be resolved, we will keep the funds in your wallet</div>
+    <div class="list-item">You'll receive updates as we investigate your case</div>
+
+    <div class="info-box">
+        <strong>📌 Important:</strong> You can try to withdraw again to a different bank account, or wait for our resolution. Your funds are safe in your wallet.
+    </div>
+
+    <div class="cta-section">
+        <a href="{{ dashboard_url }}" class="button">View Wallet</a>
+    </div>
+
+    <p class="body-text" style="margin-top: 20px;">
+        If you believe there's an error, or if you have questions about this dispute, please don't hesitate to contact our support team.
+    </p>
+
+    <p class="body-text" style="font-size: 12px; color: var(--color-text-secondary); margin-top: 20px;">
+        <strong>Dispute ID:</strong> #{{ dispute_id }}<br>
+        <a href="{{ support_url }}" style="color: var(--color-info);">Contact Support</a> • <a href="{{ dashboard_url }}" style="color: var(--color-info);">View Wallet</a>
+    </p>
+{% endblock %}

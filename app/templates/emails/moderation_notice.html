@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Content Moderation Notice{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Content Moderation Notice
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        Our moderation team has reviewed your content and taken the following action to maintain community standards.
+    </p>
+
+    <div class="alert-box">
+        <strong>Content Status:</strong><br>
+        Your content has been <strong>{{ action_label }}</strong>
+    </div>
+
+    <div class="section-title">Details</div>
+    <div class="info-row">
+        <div class="info-row-label">Content Type:</div>
+        <div class="info-row-value">{{ content_type }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Action Taken:</div>
+        <div class="info-row-value"><strong>{{ action_label }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Date:</div>
+        <div class="info-row-value">{{ action_date }}</div>
+    </div>
+
+    {% if reason %}
+    <div class="section-title">Reason for Action</div>
+    <div class="highlight-box">
+        <div class="highlight-box-title">🚨 Moderation Reason</div>
+        <div class="highlight-box-content">
+            {{ reason }}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if action == "removed" %}
+    <div class="alert-box">
+        <strong>What This Means:</strong><br>
+        Your content has been removed from JobConnect because it violated our Community Guidelines. 
+        It is no longer visible to other users.
+    </div>
+
+    <p class="body-text">
+        <strong>What You Can Do:</strong>
+    </p>
+    <div class="list-item">Review our Community Guidelines</div>
+    <div class="list-item">Understand why the content was removed</div>
+    <div class="list-item">Make corrections and resubmit if applicable</div>
+    <div class="list-item">Contact our support team if you believe this was an error</div>
+
+    {% elif action == "hidden" %}
+    <div class="alert-box">
+        <strong>What This Means:</strong><br>
+        Your content has been hidden pending further review. It is temporarily not visible to other users.
+    </div>
+
+    <p class="body-text">
+        Our team will review it further within 24-48 hours. We'll send you an update once the review is complete.
+    </p>
+
+    {% elif action == "warning" %}
+    <div class="alert-box">
+        <strong>⚠️ Account Warning:</strong><br>
+        This is a formal warning. Further violations may result in content removal or account suspension.
+    </div>
+
+    <p class="body-text">
+        <strong>Please Note:</strong>
+    </p>
+    <div class="list-item">Review the Community Guidelines carefully</div>
+    <div class="list-item">Subsequent violations may result in stricter action</div>
+    <div class="list-item">You have the right to appeal this decision</div>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ guidelines_url }}" class="button">Read Community Guidelines</a>
+        {% if appeal_url %}
+        <a href="{{ appeal_url }}" class="button button-secondary">Appeal This Decision</a>
+        {% endif %}
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        <strong>Disagree with this action?</strong> You can appeal this decision. 
+        <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">Contact our support team</a> 
+        with details about your appeal.
+    </p>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Referral Reward Earned!{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        You've Earned a Referral Reward! 💰
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        Great news! Your referral has been successful and you've earned a reward. 
+        Thank you for spreading the word about JobConnect!
+    </p>
+
+    <div class="success-box">
+        <strong>✓ Reward Earned:</strong> Your account has been credited with {{ reward_amount }}.
+    </div>
+
+    <div class="section-title">Referral Details</div>
+    <div class="info-row">
+        <div class="info-row-label">Referral Bonus:</div>
+        <div class="info-row-value" style="font-weight: 700; color: var(--color-success);">{{ reward_amount }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Referred User:</div>
+        <div class="info-row-value">{{ referred_user_name }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Reward Type:</div>
+        <div class="info-row-value">{{ reward_type }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Date Earned:</div>
+        <div class="info-row-value">{{ reward_date }}</div>
+    </div>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">💡 Your Referral Program Stats</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Total Referrals:</div>
+                <div class="info-row-value"><strong>{{ total_referrals }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Earnings:</div>
+                <div class="info-row-value" style="font-weight: 700; color: var(--color-success);">{{ total_earnings }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Referral Link:</div>
+                <div class="info-row-value">
+                    <code style="background: var(--color-neutral); padding: 4px 8px; border-radius: 3px;">{{ referral_link }}</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="body-text">
+        <strong>Keep Referring to Earn More!</strong><br>
+        You're doing great! Continue referring your friends and colleagues to earn more rewards.
+    </p>
+
+    <div class="list-item">Share your unique referral link with friends</div>
+    <div class="list-item">They sign up and verify their email</div>
+    <div class="list-item">You both earn rewards!</div>
+
+    <div class="button-container">
+        <a href="{{ referral_dashboard_url }}" class="button">View Referral Dashboard</a>
+        <a href="{{ wallet_url }}" class="button button-secondary">Check Wallet</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Questions about the referral program? 
+        <a href="{{ app_url }}/help/referrals" style="color: var(--color-primary); text-decoration: none;">Learn more</a> 
+        or <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">contact support</a>.
+    </p>
+{% endblock %}

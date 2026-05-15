@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to JobConnect - Get Started Today{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Welcome to JobConnect, {{ first_name }}! 🎉
+    </div>
+
+    <p class="body-text">
+        We're thrilled to have you join our community of professionals and top employers. 
+        JobConnect is the platform where opportunities meet talent.
+    </p>
+
+    {% if user_type == "employer" %}
+        <div class="highlight-box">
+            <div class="highlight-box-title">🏢 You're registered as an Employer</div>
+            <div class="highlight-box-content">
+                Post your job openings, review qualified candidates, and build your perfect team. 
+                You have access to our advanced hiring tools and candidate database.
+            </div>
+        </div>
+
+        <p class="body-text">
+            <strong>Here's what you can do next:</strong>
+        </p>
+        <div class="list-item">Verify your email address</div>
+        <div class="list-item">Complete your company profile</div>
+        <div class="list-item">Post your first job listing</div>
+        <div class="list-item">Browse qualified candidates</div>
+
+        <div class="button-container">
+            <a href="{{ action_url }}" class="button">Complete Your Profile</a>
+        </div>
+    {% else %}
+        <div class="highlight-box">
+            <div class="highlight-box-title">👤 You're registered as a Professional</div>
+            <div class="highlight-box-content">
+                Explore job opportunities from top companies, showcase your skills, and grow your career. 
+                Build your professional profile to stand out to employers.
+            </div>
+        </div>
+
+        <p class="body-text">
+            <strong>Here's what you can do next:</strong>
+        </p>
+        <div class="list-item">Verify your email address</div>
+        <div class="list-item">Complete your professional profile</div>
+        <div class="list-item">Upload your resume</div>
+        <div class="list-item">Start applying to jobs</div>
+
+        <div class="button-container">
+            <a href="{{ action_url }}" class="button">Build Your Profile</a>
+        </div>
+    {% endif %}
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        <strong>Need help?</strong> Check out our <a href="{{ app_url }}/help" style="color: var(--color-primary); text-decoration: none;">help center</a> 
+        or reply to this email. Our support team is always ready to assist.
+    </p>
+{% endblock %}

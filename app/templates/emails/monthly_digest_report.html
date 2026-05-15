@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Your Monthly Digest - {{ month }}{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Your JobConnect Monthly Digest 📊
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Here's a summary of your activity on JobConnect for {{ month }}. 
+        See how you're progressing and what's happening on the platform.
+    </p>
+
+    {% if user_type == "employer" %}
+        <div class="section-title">Hiring Activity</div>
+        <table class="table">
+            <tr>
+                <th>Metric</th>
+                <th style="text-align: right;">Count</th>
+            </tr>
+            {% if active_jobs %}
+            <tr>
+                <td>Active Job Listings</td>
+                <td style="text-align: right; font-weight: 600;">{{ active_jobs }}</td>
+            </tr>
+            {% endif %}
+            {% if new_applications %}
+            <tr>
+                <td>New Applications Received</td>
+                <td style="text-align: right; font-weight: 600; color: var(--color-primary);">{{ new_applications }}</td>
+            </tr>
+            {% endif %}
+            {% if candidates_interviewed %}
+            <tr>
+                <td>Candidates Interviewed</td>
+                <td style="text-align: right; font-weight: 600;">{{ candidates_interviewed }}</td>
+            </tr>
+            {% endif %}
+            {% if positions_filled %}
+            <tr>
+                <td>Positions Filled</td>
+                <td style="text-align: right; font-weight: 600; color: var(--color-success);">{{ positions_filled }}</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        {% if top_job %}
+        <div class="section-title">Top Performing Job</div>
+        <div class="highlight-box">
+            <div class="highlight-box-title">📋 {{ top_job.title }}</div>
+            <div class="highlight-box-content">
+                <div class="info-row">
+                    <div class="info-row-label">Views:</div>
+                    <div class="info-row-value">{{ top_job.views }}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-row-label">Applications:</div>
+                    <div class="info-row-value">{{ top_job.applications }}</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    {% else %}
+        <div class="section-title">Your Activity</div>
+        <table class="table">
+            <tr>
+                <th>Metric</th>
+                <th style="text-align: right;">Count</th>
+            </tr>
+            {% if applications_sent %}
+            <tr>
+                <td>Applications Sent</td>
+                <td style="text-align: right; font-weight: 600; color: var(--color-primary);">{{ applications_sent }}</td>
+            </tr>
+            {% endif %}
+            {% if interviews_scheduled %}
+            <tr>
+                <td>Interviews Scheduled</td>
+                <td style="text-align: right; font-weight: 600;">{{ interviews_scheduled }}</td>
+            </tr>
+            {% endif %}
+            {% if profile_views %}
+            <tr>
+                <td>Profile Views</td>
+                <td style="text-align: right; font-weight: 600;">{{ profile_views }}</td>
+            </tr>
+            {% endif %}
+            {% if skills_endorsed %}
+            <tr>
+                <td>Skills Endorsed</td>
+                <td style="text-align: right; font-weight: 600;">{{ skills_endorsed }}</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        {% if top_job %}
+        <div class="section-title">Top Opportunity This Month</div>
+        <div class="highlight-box">
+            <div class="highlight-box-title">🎯 {{ top_job.title }}</div>
+            <div class="highlight-box-content">
+                <strong>{{ top_job.company }}</strong><br>
+                Location: {{ top_job.location }}<br>
+                Salary: {{ top_job.salary }}
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if recent_activity %}
+    <div class="section-title">Recent Highlights</div>
+    {% for activity in recent_activity %}
+    <div class="list-item">{{ activity }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ dashboard_url }}" class="button">View Full Dashboard</a>
+        <a href="{{ action_url }}" class="button button-secondary">Take Action</a>
+    </div>
+
+    <div class="success-box">
+        <strong>💡 This Month's Insight:</strong> Check your analytics dashboard for detailed insights and trends.
+    </div>
+{% endblock %}

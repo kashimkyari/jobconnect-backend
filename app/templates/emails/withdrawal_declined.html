@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Withdrawal Request Declined{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Withdrawal Request Declined ❌
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Unfortunately, your withdrawal request has been declined. The requested amount (₦{{ total_amount }}) has been restored to your wallet and is now available for use.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Request Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Withdrawal Amount:</div>
+                <div class="info-row-value">{{ withdrawal_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Amount (with tax):</div>
+                <div class="info-row-value" style="font-size: 16px; font-weight: 700; color: var(--color-danger);">₦{{ total_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Recipient Bank:</div>
+                <div class="info-row-value">{{ bank_name }} ***{{ account_number_last_4 }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Declined Date:</div>
+                <div class="info-row-value">{{ declined_date }}</div>
+            </div>
+        </div>
+    </div>
+
+    {% if decline_reason %}
+    <div class="warning-box">
+        <strong>📌 Reason for Decline:</strong>
+        <p style="margin-top: 8px;">{{ decline_reason }}</p>
+    </div>
+    {% endif %}
+
+    <div class="info-box">
+        <strong>💰 Your Balance:</strong> The funds have been restored to your wallet account and are now available for withdrawal, transfer, or other uses.
+    </div>
+
+    <div class="cta-section">
+        <a href="{{ dashboard_url }}" class="button">View Your Wallet</a>
+    </div>
+
+    <p class="body-text" style="margin-top: 20px;">
+        You can submit another withdrawal request at any time. If you have questions about this decision or need assistance, please contact our support team.
+    </p>
+
+    <p class="body-text" style="font-size: 12px; color: var(--color-text-secondary); margin-top: 20px;">
+        <a href="{{ support_url }}" style="color: var(--color-info);">Contact Support</a> • <a href="{{ faq_url }}" style="color: var(--color-info);">Withdrawal FAQ</a>
+    </p>
+{% endblock %}

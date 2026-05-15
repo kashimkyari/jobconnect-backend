@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Your Email Address{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Verify Your Email Address
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        We're almost there! To complete your account setup and unlock all features on JobConnect, 
+        please verify your email address.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📧 Your Verification Code</div>
+        <div class="highlight-box-content">
+            <div class="code-block">{{ otp }}</div>
+            <p style="margin-top: 12px; font-size: 13px;">
+                This code is valid for <strong>10 minutes</strong>
+            </p>
+        </div>
+    </div>
+
+    <p class="body-text">
+        <strong>How to verify:</strong>
+    </p>
+    <div class="list-item">Enter this code in the verification screen</div>
+    <div class="list-item">Or use the button below to verify immediately</div>
+
+    <div class="button-container">
+        <a href="{{ verification_url }}" class="button">Verify Email Address</a>
+    </div>
+
+    <div class="alert-box">
+        <strong>⚠️ Didn't request this?</strong><br>
+        If you didn't create this account, you can safely ignore this email or contact our support team.
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text" style="font-size: 13px; color: var(--color-text-secondary);">
+        If you didn't receive the code or it expired, you can request a new one from your account settings.
+    </p>
+{% endblock %}

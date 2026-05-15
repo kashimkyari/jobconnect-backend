@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Account Locked for Security{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Your Account Has Been Temporarily Locked
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        For security reasons, your JobConnect account has been temporarily locked due to multiple failed login attempts.
+    </p>
+
+    <div class="alert-box">
+        <strong>🔒 Account Status: Locked</strong><br>
+        Your account will automatically unlock after the specified time below.
+    </div>
+
+    <div class="section-title">Lock Details</div>
+    <div class="info-row">
+        <div class="info-row-label">Locked At:</div>
+        <div class="info-row-value">{{ locked_at }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Unlocks At:</div>
+        <div class="info-row-value"><strong>{{ unlock_time }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Time Remaining:</div>
+        <div class="info-row-value">{{ time_remaining }}</div>
+    </div>
+
+    <p class="body-text" style="margin-top: 24px;">
+        <strong>What should you do?</strong>
+    </p>
+    <div class="list-item">Wait for the lock to expire before attempting to log in again</div>
+    <div class="list-item">If this wasn't you, <a href="{{ app_url }}/support" style="color: var(--color-primary);">report suspicious activity</a></div>
+    <div class="list-item">Consider using a password manager to generate strong, unique passwords</div>
+    <div class="list-item">Enable two-factor authentication for additional security</div>
+
+    <div class="divider"></div>
+
+    <div class="success-box">
+        <strong>✓ Pro Tip:</strong> We automatically unlock your account after the timeout period. 
+        No action needed from you right now. Just come back later!
+    </div>
+
+    <p class="body-text">
+        <strong>Suspicious Activity?</strong><br>
+        If you believe your account was compromised, 
+        <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">contact our security team immediately</a>.
+    </p>
+{% endblock %}

@@ -1,0 +1,20 @@
+{
+  "name": "FastAPI + Postgres Dev",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/postgres:1": {
+      "version": "15",
+      "database": "jobconnect",
+      "user": "postgres",
+      "password": "postgres"
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI",
+      "onAutoForward": "openPreview"
+    }
+  }
+}

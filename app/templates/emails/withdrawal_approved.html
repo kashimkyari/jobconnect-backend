@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Withdrawal Request Approved{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Withdrawal Approved ✅
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Great news! Your withdrawal request has been approved by our admin team. The funds are now being transferred to your bank account.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">💳 Transfer Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Withdrawal Amount:</div>
+                <div class="info-row-value">{{ withdrawal_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Tax Applied:</div>
+                <div class="info-row-value">{{ tax_amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Total Charged:</div>
+                <div class="info-row-value" style="font-size: 16px; font-weight: 700; color: var(--color-danger);">{{ total_amount }}</div>
+            </div>
+            <div class="info-row" style="margin-top: 12px; border-top: 1px solid var(--color-border); padding-top: 12px;">
+                <div class="info-row-label">Recipient Bank:</div>
+                <div class="info-row-value">{{ bank_name }} ***{{ account_number_last_4 }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Approved Date:</div>
+                <div class="info-row-value">{{ approved_date }}</div>
+            </div>
+            {% if transfer_reference %}
+            <div class="info-row">
+                <div class="info-row-label">Transfer Reference:</div>
+                <div class="info-row-value">#{{ transfer_reference }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if admin_notes %}
+    <div class="info-box">
+        <strong>📝 Admin Notes:</strong>
+        <p style="margin-top: 8px;">{{ admin_notes }}</p>
+    </div>
+    {% endif %}
+
+    <div class="success-box">
+        <strong>✓ Transfer In Progress:</strong> Your withdrawal is now being processed. Bank transfers typically take 1-2 business days, depending on your bank.
+    </div>
+
+    <div class="cta-section">
+        <a href="{{ dashboard_url }}" class="button">View Transaction Status</a>
+    </div>
+
+    <p class="body-text" style="margin-top: 20px;">
+        You'll receive another update once the transfer has been completed and deposited into your bank account.
+    </p>
+{% endblock %}

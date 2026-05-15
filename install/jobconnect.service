@@ -1,0 +1,13 @@
+[Unit]
+Description=JobConnect Application
+After=network.target postgresql.service redis.service
+
+[Service]
+User=
+Group=
+WorkingDirectory=
+ExecStart=
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Action Required on Your Account{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Action Required! ⚠️
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        We need you to take action on your JobConnect account to maintain full access to our platform.
+    </p>
+
+    {% if deadline or time_remaining %}
+    <div class="alert-box">
+        <strong>⏰ Time Sensitive!</strong><br>
+        {% if deadline %}
+        Deadline: <strong>{{ deadline }}</strong>
+        {% endif %}
+        {% if time_remaining %}
+        Time Remaining: <strong>{{ time_remaining }}</strong>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">{{ action_title }}</div>
+        <div class="highlight-box-content">
+            {{ action_description }}
+        </div>
+    </div>
+
+    {% if reason %}
+    <div class="section-title">Why This Is Required</div>
+    <p class="body-text">
+        {{ reason }}
+    </p>
+    {% endif %}
+
+    <div class="section-title">Steps to Complete</div>
+    {% for step in steps %}
+    <div class="list-item">{{ step }}</div>
+    {% endfor %}
+
+    <div class="button-container" style="margin-top: 28px;">
+        <a href="{{ action_url }}" class="button">Complete Action Now</a>
+    </div>
+
+    {% if consequences %}
+    <div class="alert-box" style="margin-top: 24px;">
+        <strong>⚠️ What Happens If You Don't:</strong><br>
+        {{ consequences }}
+    </div>
+    {% endif %}
+
+    <div class="success-box" style="margin-top: 24px;">
+        <strong>✓ Good News:</strong> This action usually takes less than 5 minutes to complete.
+    </div>
+
+    {% if help_url %}
+    <div class="button-container">
+        <a href="{{ help_url }}" class="button button-secondary">View Help & Guides</a>
+    </div>
+    {% endif %}
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Need assistance? 
+        <a href="{{ support_url }}" style="color: var(--color-primary); text-decoration: none;">Contact our support team</a>.
+    </p>
+{% endblock %}

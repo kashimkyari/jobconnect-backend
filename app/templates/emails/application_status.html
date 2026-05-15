@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Application Status Update{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Your Application Status Has Been Updated
+    </div>
+
+    <p class="body-text">
+        Hi {{ candidate_name }},
+    </p>
+
+    <p class="body-text">
+        Thank you for applying to JobConnect! We have an important update about your application.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📊 Application Status</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Job Title:</div>
+                <div class="info-row-value"><strong>{{ job_title }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Company:</div>
+                <div class="info-row-value"><strong>{{ company_name }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Status:</div>
+                <div class="info-row-value">
+                    {% if status == "approved" or status == "interview" or status == "accepted" %}
+                        <span class="status-badge status-approved">{{ status_label }}</span>
+                    {% elif status == "rejected" or status == "declined" %}
+                        <span class="status-badge status-rejected">{{ status_label }}</span>
+                    {% elif status == "pending" %}
+                        <span class="status-badge status-pending">{{ status_label }}</span>
+                    {% else %}
+                        <span class="status-badge">{{ status_label }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Updated On:</div>
+                <div class="info-row-value">{{ updated_date }}</div>
+            </div>
+        </div>
+    </div>
+
+    {% if status == "interview" or status == "approved" %}
+        <div class="success-box">
+            <strong>🎉 Congratulations!</strong> Your application has been reviewed positively. 
+            The employer would like to move forward with you!
+        </div>
+
+        <p class="body-text">
+            <strong>What happens next?</strong>
+        </p>
+        {% if interview_date %}
+            <div class="section-title">Interview Details</div>
+            <div class="info-row">
+                <div class="info-row-label">Interview Date:</div>
+                <div class="info-row-value"><strong>{{ interview_date }}</strong></div>
+            </div>
+            {% if interview_time %}
+            <div class="info-row">
+                <div class="info-row-label">Time:</div>
+                <div class="info-row-value">{{ interview_time }}</div>
+            </div>
+            {% endif %}
+            {% if interview_format %}
+            <div class="info-row">
+                <div class="info-row-label">Format:</div>
+                <div class="info-row-value">{{ interview_format }}</div>
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="list-item">The employer will be in touch with you shortly</div>
+            <div class="list-item">Keep your phone and email accessible</div>
+            <div class="list-item">Review the job description once more</div>
+        {% endif %}
+
+    {% elif status == "rejected" or status == "declined" %}
+        <div class="alert-box">
+            <strong>Application Status: Not Selected</strong><br>
+            While your profile was strong, the employer has decided to move forward with other candidates at this time.
+        </div>
+
+        <p class="body-text">
+            This doesn't diminish your qualifications! Keep applying to other opportunities that match your skills.
+            {% if feedback %}We received the following feedback from the employer:{% endif %}
+        </p>
+
+        {% if feedback %}
+        <div class="highlight-box">
+            <div class="highlight-box-title">💬 Employer Feedback</div>
+            <div class="highlight-box-content">
+                {{ feedback }}
+            </div>
+        </div>
+        {% endif %}
+
+        <p class="body-text">
+            <strong>Keep searching:</strong>
+        </p>
+        <div class="list-item">Browse similar job listings</div>
+        <div class="list-item">Improve your profile with new skills and experience</div>
+        <div class="list-item">Set up job alerts for roles matching your expertise</div>
+
+    {% elif status == "pending" %}
+        <div class="alert-box">
+            <strong>Application Status: Under Review</strong><br>
+            Your application is being reviewed by the employer. We'll notify you as soon as there's an update.
+        </div>
+
+        <p class="body-text">
+            <strong>In the meantime:</strong>
+        </p>
+        <div class="list-item">Continue applying to other positions</div>
+        <div class="list-item">Enhance your profile with more skills</div>
+        <div class="list-item">Keep checking your JobConnect inbox</div>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ application_url }}" class="button">View Application</a>
+        <a href="{{ job_search_url }}" class="button button-secondary">Browse More Jobs</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Questions about your application? 
+        <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">Contact our support team</a>.
+    </p>
+{% endblock %}

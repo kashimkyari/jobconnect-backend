@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Subscription Confirmation{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Subscription Confirmed! 🎊
+    </div>
+
+    <p class="body-text">
+        Hi {{ user_name }},
+    </p>
+
+    <p class="body-text">
+        Thank you for upgrading to {{ plan_name }}! Your subscription is now active and you have access to all premium features.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Subscription Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Plan:</div>
+                <div class="info-row-value"><strong>{{ plan_name }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Billing Cycle:</div>
+                <div class="info-row-value">{{ billing_cycle }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Amount:</div>
+                <div class="info-row-value" style="font-weight: 700; color: var(--color-primary);">{{ amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Start Date:</div>
+                <div class="info-row-value">{{ start_date }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Renewal Date:</div>
+                <div class="info-row-value">{{ renewal_date }}</div>
+            </div>
+            {% if next_billing_date %}
+            <div class="info-row">
+                <div class="info-row-label">Next Billing:</div>
+                <div class="info-row-value">{{ next_billing_date }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="success-box">
+        <strong>✓ All Features Unlocked:</strong> You now have access to all premium features of {{ plan_name }}.
+    </div>
+
+    {% if features %}
+    <div class="section-title">Your New Features</div>
+    {% for feature in features %}
+    <div class="list-item">{{ feature }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ dashboard_url }}" class="button">Go to Dashboard</a>
+        <a href="{{ settings_url }}" class="button button-secondary">Manage Subscription</a>
+    </div>
+
+    <div class="section-title">Need Help?</div>
+    <div class="list-item">Browse our <a href="{{ help_url }}" style="color: var(--color-primary);">knowledge base</a></div>
+    <div class="list-item">Watch <a href="{{ tutorials_url }}" style="color: var(--color-primary);">tutorial videos</a></div>
+    <div class="list-item">Contact our <a href="{{ support_url }}" style="color: var(--color-primary);">support team</a></div>
+{% endblock %}

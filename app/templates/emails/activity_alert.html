@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Account Activity Alert{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Account Security Alert 🔐
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        We detected unusual activity on your JobConnect account. 
+        Please review the details below and confirm this was you.
+    </p>
+
+    <div class="alert-box">
+        <strong>⚠️ Unusual Activity Detected</strong><br>
+        If this wasn't you, secure your account immediately!
+    </div>
+
+    <div class="section-title">Activity Details</div>
+    <div class="info-row">
+        <div class="info-row-label">Activity Type:</div>
+        <div class="info-row-value">{{ activity_type }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Location:</div>
+        <div class="info-row-value">{{ location }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Device:</div>
+        <div class="info-row-value">{{ device }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">IP Address:</div>
+        <div class="info-row-value">{{ ip_address }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Time:</div>
+        <div class="info-row-value">{{ activity_time }}</div>
+    </div>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">🔍 What Happened?</div>
+        <div class="highlight-box-content">
+            {{ activity_description }}
+        </div>
+    </div>
+
+    <p class="body-text">
+        <strong>Confirm or Deny This Activity:</strong>
+    </p>
+    <div class="list-item">Did you perform this action? Click "Yes, that was me"</div>
+    <div class="list-item">Wasn't you? Click "No, secure my account" immediately</div>
+    <div class="list-item">Not sure? Review your recent activity and change your password</div>
+
+    <div class="button-container">
+        <a href="{{ confirm_url }}" class="button">Yes, That Was Me</a>
+        <a href="{{ deny_url }}" class="button button-secondary">No, Secure Account</a>
+    </div>
+
+    <div class="alert-box" style="margin-top: 24px;">
+        <strong>🛡️ Security Recommendations:</strong><br>
+        • Enable two-factor authentication<br>
+        • Review your connected devices<br>
+        • Update your password regularly<br>
+        • Never share your password with anyone
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Didn't request this email? Your account might be at risk. 
+        <a href="{{ security_url }}" style="color: var(--color-primary); text-decoration: none;">Secure your account now</a>.
+    </p>
+{% endblock %}

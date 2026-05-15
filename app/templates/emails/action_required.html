@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Important: Action Required{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Action Required ⏰
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        We need you to take action on your JobConnect account. Please review the details below.
+    </p>
+
+    <div class="alert-box">
+        <strong>{{ action_title }}</strong><br>
+        {{ action_description }}
+    </div>
+
+    {% if deadline %}
+    <div class="section-title">Important Deadline</div>
+    <div class="info-row">
+        <div class="info-row-label">Action Deadline:</div>
+        <div class="info-row-value"><strong>{{ deadline }}</strong></div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Time Remaining:</div>
+        <div class="info-row-value">{{ time_remaining }}</div>
+    </div>
+    {% endif %}
+
+    {% if reason %}
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Why This Action Is Needed</div>
+        <div class="highlight-box-content">
+            {{ reason }}
+        </div>
+    </div>
+    {% endif %}
+
+    <p class="body-text">
+        <strong>Steps to Complete:</strong>
+    </p>
+    {% for step in steps %}
+    <div class="list-item">{{ step }}</div>
+    {% endfor %}
+
+    {% if consequences %}
+    <div class="alert-box">
+        <strong>⚠️ If You Don't Act:</strong><br>
+        {{ consequences }}
+    </div>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ action_url }}" class="button">Take Action Now</a>
+        {% if help_url %}
+        <a href="{{ help_url }}" class="button button-secondary">Need Help?</a>
+        {% endif %}
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        Having trouble? 
+        <a href="{{ support_url }}" style="color: var(--color-primary); text-decoration: none;">Contact our support team</a> 
+        and we'll be happy to assist.
+    </p>
+{% endblock %}

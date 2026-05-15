@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Account Security Alert{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        🔒 Account Security Alert
+    </div>
+
+    <p class="body-text">
+        Hi {{ first_name }},
+    </p>
+
+    <p class="body-text">
+        We detected a {{ activity_type }} to your JobConnect account. Please review the details below.
+    </p>
+
+    <div class="alert-box">
+        <strong>Activity Details:</strong>
+    </div>
+
+    <div class="section-title">When & Where</div>
+    <div class="info-row">
+        <div class="info-row-label">Time:</div>
+        <div class="info-row-value">{{ activity_time }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Location:</div>
+        <div class="info-row-value">{{ location }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">Device:</div>
+        <div class="info-row-value">{{ device }}</div>
+    </div>
+    <div class="info-row">
+        <div class="info-row-label">IP Address:</div>
+        <div class="info-row-value"><code style="background: var(--color-neutral); padding: 2px 6px;">{{ ip_address }}</code></div>
+    </div>
+
+    <div class="section-title">Activity Description</div>
+    <p class="body-text">
+        {{ activity_description }}
+    </p>
+
+    <div class="section-title">Was This You?</div>
+    <div class="button-container">
+        <a href="{{ confirm_url }}" class="button" style="background: var(--color-success);">Yes, This Was Me</a>
+        <a href="{{ deny_url }}" class="button" style="background: var(--color-danger);">This Wasn't Me</a>
+    </div>
+
+    <div class="alert-box" style="margin-top: 24px;">
+        <strong>⚠️ Important:</strong> If this wasn't you, your account may have been compromised. 
+        Change your password immediately and enable two-factor authentication.
+    </div>
+
+    <p class="body-text" style="margin-top: 24px;">
+        <strong>Secure Your Account:</strong>
+    </p>
+    <div class="list-item">Change your password to a strong, unique one</div>
+    <div class="list-item">Enable two-factor authentication (2FA)</div>
+    <div class="list-item">Review recent account activity</div>
+    <div class="list-item">Check connected devices and sessions</div>
+
+    <div class="button-container" style="margin-top: 24px;">
+        <a href="{{ security_url }}" class="button button-secondary">Review Security Settings</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text" style="font-size: 13px;">
+        If you didn't perform any of these actions or need help, 
+        <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">contact our security team</a> immediately.
+    </p>
+{% endblock %}

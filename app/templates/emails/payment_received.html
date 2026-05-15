@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Received - {{ amount }}{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        Payment Received! 💰
+    </div>
+
+    <p class="body-text">
+        Hi {{ recipient_name }},
+    </p>
+
+    <p class="body-text">
+        Great news! We've received a payment to your JobConnect account. Here are the transaction details.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">💳 Transaction Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Amount:</div>
+                <div class="info-row-value" style="font-size: 18px; font-weight: 700; color: var(--color-success);">{{ amount }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Transaction ID:</div>
+                <div class="info-row-value">#{{ transaction_id }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Date:</div>
+                <div class="info-row-value">{{ transaction_date }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">From:</div>
+                <div class="info-row-value">{{ payer_name }}</div>
+            </div>
+            {% if reference %}
+            <div class="info-row">
+                <div class="info-row-label">Reference:</div>
+                <div class="info-row-value">{{ reference }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="success-box">
+        <strong>✓ Payment Confirmed:</strong> This payment has been verified and added to your account balance.
+    </div>
+
+    {% if payment_method %}
+    <div class="section-title">Payment Method</div>
+    <div class="info-row">
+        <div class="info-row-label">Method:</div>
+        <div class="info-row-value">{{ payment_method }}</div>
+    </div>
+    {% endif %}
+
+    <p class="body-text" style="margin-top: 24px;">
+        <strong>What's Next:</strong>
+    </p>
+    <div class="list-item">Your account balance has been updated</div>
+    <div class="list-item">You can withdraw funds anytime to your linked account</div>
+    <div class="list-item">View detailed transaction history in your dashboard</div>
+
+    <div class="button-container">
+        <a href="{{ wallet_url }}" class="button">View Wallet</a>
+        <a href="{{ transaction_url }}" class="button button-secondary">View Transaction</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="body-text">
+        <strong>Unexpected payment?</strong> 
+        <a href="{{ app_url }}/support" style="color: var(--color-primary); text-decoration: none;">Contact our support team immediately</a>.
+    </p>
+{% endblock %}

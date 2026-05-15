@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}New Job Application Received{% endblock %}
+
+{% block content %}
+    <div class="greeting">
+        You Have a New Job Application! 🎉
+    </div>
+
+    <p class="body-text">
+        Hi {{ employer_name }},
+    </p>
+
+    <p class="body-text">
+        Great news! You've received a new application for your job posting. 
+        Review the candidate's profile and qualifications below.
+    </p>
+
+    <div class="highlight-box">
+        <div class="highlight-box-title">📋 Application Details</div>
+        <div class="highlight-box-content">
+            <div class="info-row">
+                <div class="info-row-label">Job Title:</div>
+                <div class="info-row-value"><strong>{{ job_title }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Candidate:</div>
+                <div class="info-row-value"><strong>{{ candidate_name }}</strong></div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-label">Applied On:</div>
+                <div class="info-row-value">{{ applied_date }}</div>
+            </div>
+            {% if candidate_rating %}
+            <div class="info-row">
+                <div class="info-row-label">Candidate Rating:</div>
+                <div class="info-row-value">⭐ {{ candidate_rating }}/5</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <p class="body-text">
+        <strong>Candidate Summary:</strong><br>
+        {{ candidate_summary }}
+    </p>
+
+    {% if candidate_email %}
+    <div class="section-title">Next Steps</div>
+    <div class="list-item">Review the full application and candidate profile</div>
+    <div class="list-item">Schedule an interview or request more information</div>
+    <div class="list-item">Send a message to the candidate at {{ candidate_email }}</div>
+    <div class="list-item">Mark as reviewed or reject if not a fit</div>
+    {% endif %}
+
+    <div class="button-container">
+        <a href="{{ application_url }}" class="button">Review Application</a>
+        <a href="{{ candidate_url }}" class="button button-secondary">View Profile</a>
+    </div>
+
+    <div class="success-box">
+        <strong>💡 Tip:</strong> Respond to applications quickly! Candidates appreciate timely feedback.
+    </div>
+{% endblock %}
